@@ -73,3 +73,114 @@
 #include <cmath>
 using namespace std;
 
+// =============================================================================
+//
+// TASK: Console-Based Simple Calculator
+//
+// =============================================================================
+
+#include <iostream>
+#include <iomanip>
+#include <cmath>
+using namespace std;
+
+double add(double a, double b) {
+    return a + b;
+}
+
+double subtract(double a, double b) {
+    return a - b;
+}
+
+double multiply(double a, double b) {
+    return a * b;
+}
+
+double divide(double a, double b) {
+    // Return NAN as a sentinel; main() checks for divide-by-zero before calling this
+    if (b == 0) {
+        return NAN;
+    }
+    return a / b;
+}
+
+double modulus(int a, int b) {
+    if (b == 0) {
+        return NAN;
+    }
+    return a % b;
+}
+
+double power(double base, int exponent) {
+    return pow(base, exponent);
+}
+
+int main() {
+    int choice;
+
+    do {
+        cout << "\n============================" << endl;
+        cout << "     SIMPLE CALCULATOR" << endl;
+        cout << "============================" << endl;
+        cout << "1. Addition" << endl;
+        cout << "2. Subtraction" << endl;
+        cout << "3. Multiplication" << endl;
+        cout << "4. Division" << endl;
+        cout << "5. Modulus" << endl;
+        cout << "6. Exponentiation" << endl;
+        cout << "7. Quit" << endl;
+        cout << "Select an operation (1-7): ";
+        cin >> choice;
+
+        if (cin.fail()) {
+            cout << "Invalid input. Exiting." << endl;
+            break;
+        }
+
+        if (choice == 7) {
+            cout << "Goodbye!" << endl;
+            continue;
+        }
+
+        if (choice < 1 || choice > 7) {
+            cout << "Invalid choice. Please select 1-7." << endl;
+            continue;
+        }
+
+        double a, b;
+        cout << "Enter first number : ";
+        cin >> a;
+        cout << "Enter second number: ";
+        cin >> b;
+
+        cout << fixed << setprecision(2);
+
+        if (choice == 1) {
+            cout << "Result: " << a << " + " << b << " = " << add(a, b) << endl;
+        } else if (choice == 2) {
+            cout << "Result: " << a << " - " << b << " = " << subtract(a, b) << endl;
+        } else if (choice == 3) {
+            cout << "Result: " << a << " * " << b << " = " << multiply(a, b) << endl;
+        } else if (choice == 4) {
+            if (b == 0) {
+                cout << "Error: Cannot divide by zero." << endl;
+            } else {
+                cout << "Result: " << a << " / " << b << " = " << divide(a, b) << endl;
+            }
+        } else if (choice == 5) {
+            int ia = static_cast<int>(a);
+            int ib = static_cast<int>(b);
+            if (ib == 0) {
+                cout << "Error: Cannot perform modulus by zero." << endl;
+            } else {
+                cout << "Result: " << ia << " % " << ib << " = " << modulus(ia, ib) << endl;
+            }
+        } else if (choice == 6) {
+            int exponent = static_cast<int>(b);
+            cout << "Result: " << a << " ^ " << exponent << " = " << power(a, exponent) << endl;
+        }
+
+    } while (choice != 7);
+
+    return 0;
+}
