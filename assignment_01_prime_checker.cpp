@@ -37,3 +37,61 @@
 #include <iostream>
 using namespace std;
 
+// =============================================================================
+//
+// TASK: Prime Number Checker
+//
+// Write a C++ program that checks whether a given number is prime.
+//
+// A prime number is a whole number greater than 1 that has no divisors
+// other than 1 and itself (e.g., 2, 3, 5, 7, 11, 13 ...).
+//
+// -----------------------------------------------------------------------------
+// EXPECTED INPUT / OUTPUT EXAMPLES
+// -----------------------------------------------------------------------------
+//
+//   Enter a number: 7
+//   7 is a prime number.
+//
+//   Enter a number: 10
+//   10 is NOT a prime number.
+//
+//   Enter a number: 1
+//   1 is NOT a prime number.
+//
+// =============================================================================
+
+#include <iostream>
+using namespace std;
+
+bool isPrime(int n) {
+    // Numbers less than 2 are not prime
+    if (n < 2) {
+        return false;
+    }
+
+    // Check for divisors from 2 up to sqrt(n)
+    // (if n has a divisor larger than sqrt(n), it must also have one smaller than it)
+    for (int i = 2; i * i <= n; i++) {
+        if (n % i == 0) {
+            return false; // found a divisor, so n is not prime
+        }
+    }
+
+    return true; // no divisors found, n is prime
+}
+
+int main() {
+    int number;
+
+    cout << "Enter a number: ";
+    cin >> number;
+
+    if (isPrime(number)) {
+        cout << number << " is a prime number." << endl;
+    } else {
+        cout << number << " is NOT a prime number." << endl;
+    }
+
+    return 0;
+}
